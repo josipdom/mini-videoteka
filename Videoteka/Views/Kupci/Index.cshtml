@@ -1,0 +1,31 @@
+﻿@model IEnumerable<Videoteka.Models.Kupac>
+
+
+@{
+    ViewBag.Title = "Kupci";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Kupci</h2>
+@if (!Model.Any())
+{
+    <p>Nemamo još postojeće kupce.</p>
+}
+else
+{
+    <table class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>Kupac</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var kupac in Model)
+            {
+                <tr>
+                    <td>@Html.ActionLink(kupac.Naziv, "Detalji", "Kupci", new { id = kupac.Id }, null)</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

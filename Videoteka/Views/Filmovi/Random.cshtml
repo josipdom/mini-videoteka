@@ -1,8 +1,30 @@
-﻿@model Videoteka.Models.Film
+﻿@model Videoteka.ViewModels.RandomFilmViewModel
 @{
     ViewBag.Title = "Random";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>@Model.Naziv</h2>
+@*
+   Komentar 
+*@
 
+@{ 
+    var classNaziv = Model.Kupci.Count > 0 ? "popularan" : null;
+}
+
+<h2 class="@classNaziv">@Model.Film.Naziv</h2>
+
+@if (Model.Kupci.Count == 0)
+{
+    <text>Nitko nije posudio ovaj film.</text>
+}
+else
+{
+    <ul>
+
+        @foreach (var kupac in Model.Kupci)
+        {
+            <li>@kupac.Naziv</li>
+        }
+    </ul>
+}

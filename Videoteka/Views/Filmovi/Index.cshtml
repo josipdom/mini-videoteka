@@ -1,0 +1,23 @@
+﻿@model IEnumerable<Videoteka.Models.Film>
+
+@{
+    ViewBag.Title = "Filmovi";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Filmovi</h2>
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>Film</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var film in Model)
+        {
+            <tr>
+                <td>@film.Naziv</td>
+            </tr>
+        }
+    </tbody>
+</table>
