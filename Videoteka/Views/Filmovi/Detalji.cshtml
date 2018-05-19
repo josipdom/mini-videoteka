@@ -1,0 +1,14 @@
+﻿@model Videoteka.Models.Film
+
+@{
+    ViewBag.Title = Model.Naziv;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@Model.Naziv</h2>
+<ul>
+    <li>Zanr: @Model.Zanr.Naziv</li>
+    <li>Datum Izlaska: @Model.DatumIzlaska.ToLongDateString()</li>
+    <li>Datum Dodavanja: @Model.DatumDodano.ToLongDateString()</li>
+    <li>Broj Na Skladistu: @Model.BrojNaSkladistu</li>
+</ul>

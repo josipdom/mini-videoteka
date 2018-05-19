@@ -5,25 +5,66 @@ using System.Web;
 using System.Web.Mvc;
 using Videoteka.Models;
 using Videoteka.ViewModels;
+using System.Data.Entity;
+using Videoteka.Migrations;
+using System.Data.Entity.Validation;
 
 namespace Videoteka.Controllers
 {
     public class FilmoviController : Controller
     {
+        private ApplicationDbContext _context;
+
+        public FilmoviController()
+        {
+            _context = new ApplicationDbContext();
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            _context.Dispose();
+        }
         public ViewResult Index()
         {
-            var filmovi = GetFilmovi();
+            var filmovi = _context.Filmovi.Include(m => m.Zanr).ToList();
 
             return View(filmovi);    
         }
 
-        private IEnumerable<Film> GetFilmovi()
+        public ViewResult Novi()
         {
-            return new List<Film>
+            var zanrovi = _context.Zanrovi.ToList();
+
+            var viewModel = new FilmFormaViewModel
             {
-                new Film { Id = 1, Naziv = "Avatar" },
-                new Film { Id = 2, Naziv = "Contact" }
+                Zanrovi = zanrovi
             };
+
+            return View("FilmForma", viewModel);
+        }
+
+        public ActionResult Uredi(int id)
+        {
+            var film = _context.Filmovi.SingleOrDefault(c => c.Id == id);
+
+            if (film == null)
+                return HttpNotFound();
+
+            var viewModel = new FilmFormaViewModel(film)
+            {
+                Zanrovi = _context.Zanrovi.ToList()
+            };
+
+            return View("FilmForma", viewModel);
+        }
+
+        public ActionResult Detalji(int id)
+        {
+            var film = _context.Filmovi.Include(m => m.Zanr).SingleOrDefault(m => m.Id == id);
+            
+                     if (film == null)
+                        return HttpNotFound();
+            return View(film);
         }
         // GET: Filmovi/Random
         public ActionResult Random()
@@ -43,6 +84,39 @@ namespace Videoteka.Controllers
             };
 
             return View(viewModel);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Spremi(Film film)
+        {
+            if (!ModelState.IsValid)
+            {
+                var viewModel = new FilmFormaViewModel(film)
+                {
+                    Zanrovi = _context.Zanrovi.ToList()
+                };
+
+                return View("FilmForma", viewModel);
+            }
+
+            if (film.Id == 0)
+            {
+                film.DatumDodano = DateTime.Now;
+                _context.Filmovi.Add(film);
+            }
+            else
+            {
+                var movieInDb = _context.Filmovi.Single(m => m.Id == film.Id);
+                movieInDb.Naziv = film.Naziv;
+                movieInDb.ZanrId = film.ZanrId;
+                movieInDb.BrojNaSkladistu = film.BrojNaSkladistu;
+                movieInDb.DatumIzlaska = film.DatumIzlaska;
+            }
+
+                _context.SaveChanges();
+
+            return RedirectToAction("Index", "Filmovi");
         }
 
     }

@@ -17,13 +17,15 @@ else
         <thead>
             <tr>
                 <th>Kupac</th>
+                <th>Tip Clanstva</th>    
             </tr>
         </thead>
         <tbody>
             @foreach (var kupac in Model)
             {
                 <tr>
-                    <td>@Html.ActionLink(kupac.Naziv, "Detalji", "Kupci", new { id = kupac.Id }, null)</td>
+                    <td>@Html.ActionLink(kupac.Naziv, "Uredi", "Kupci", new { id = kupac.Id }, null)</td>
+                    <td>@kupac.TipClanstva.Naziv</td>
                 </tr>
             }
         </tbody>

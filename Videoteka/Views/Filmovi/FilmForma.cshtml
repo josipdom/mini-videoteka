@@ -1,0 +1,39 @@
+﻿@model Videoteka.ViewModels.FilmFormaViewModel
+
+@{
+    ViewBag.Title = Model.Naslov;
+}
+
+<h2>@Model.Naslov</h2>
+
+@using (Html.BeginForm("Spremi", "Filmovi"))
+{
+    @Html.ValidationSummary(true, "Ispravite sljedeće greške..")
+    <div class="form-group">
+        @Html.LabelFor(m => m.Naziv)
+        @Html.TextBoxFor(m => m.Naziv, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Naziv)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.DatumIzlaska)
+        @Html.TextBoxFor(m => m.DatumIzlaska, "{0:d MMM yyyy}", new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.DatumIzlaska)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.ZanrId)
+        @Html.DropDownListFor(m => m.ZanrId, new SelectList(Model.Zanrovi, "Id", "Naziv"), "", new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.ZanrId)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.BrojNaSkladistu)
+        @Html.TextBoxFor(m => m.BrojNaSkladistu, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.BrojNaSkladistu)
+    </div>
+    @Html.HiddenFor(m => m.Id)
+    @Html.AntiForgeryToken()
+    <button type="submit" class="btn btn-primary">Spremi</button>
+}
+@section scripts
+{
+   @Scripts.Render("~/bundles/jqueryval")
+}

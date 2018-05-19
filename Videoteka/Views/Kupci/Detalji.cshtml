@@ -6,3 +6,10 @@
 }
 
 <h2>@Model.Naziv</h2>
+<ul>
+    <li>Tip Clanstva: @Model.TipClanstva.Naziv</li>
+    @if (Model.DatumRodenja.HasValue)
+    {
+        <li>Birthdate: @Model.DatumRodenja.Value.ToShortDateString()</li>
+    }
+</ul>
