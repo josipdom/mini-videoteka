@@ -26,9 +26,7 @@ namespace Videoteka.Controllers
         }
         public ViewResult Index()
         {
-            var filmovi = _context.Filmovi.Include(m => m.Zanr).ToList();
-
-            return View(filmovi);    
+            return View();    
         }
 
         public ViewResult Novi()

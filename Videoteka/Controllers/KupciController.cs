@@ -81,9 +81,7 @@ namespace Videoteka.Controllers
 
         public ViewResult Index()
         {
-            var kupci = _context.Kupci.Include(c => c.TipClanstva).ToList();
-
-            return View(kupci);
+            return View();
         }
 
         public ActionResult Detalji(int id)

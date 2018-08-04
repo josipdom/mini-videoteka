@@ -7,27 +7,61 @@
 }
 
 <h2>Kupci</h2>
-@if (!Model.Any())
+
+<table id="kupci" class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>Kupac</th>
+            <th>Tip Clanstva</th>
+            <th>Obriši</th>
+        </tr>
+    </thead>
+    <tbody></tbody>
+</table>
+
+@section scripts
 {
-    <p>Nemamo još postojeće kupce.</p>
-}
-else
-{
-    <table class="table table-bordered table-hover">
-        <thead>
-            <tr>
-                <th>Kupac</th>
-                <th>Tip Clanstva</th>    
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var kupac in Model)
-            {
-                <tr>
-                    <td>@Html.ActionLink(kupac.Naziv, "Uredi", "Kupci", new { id = kupac.Id }, null)</td>
-                    <td>@kupac.TipClanstva.Naziv</td>
-                </tr>
-            }
-        </tbody>
-    </table>
+    <script>
+        $(document).ready(function () {
+            var tablica = $("#kupci").DataTable({
+                ajax: {
+                    url: "/api/kupci",
+                    dataSrc: ""
+                },
+                columns: [
+                    {
+                        data: "naziv",
+                        render: function (data, type, kupac) {
+                            return "<a href='/kupci/edit/" + kupac.id + "'>" + kupac.naziv + "</a>";
+                        }
+                    },
+                    {
+                        data: "tipClanstva.naziv"
+                    },
+                    {
+                        data: "id",
+                        render: function (data) {
+                            return "<button class='btn-link js-delete' data-kupac-id=" + data + ">Obriši</button>";
+                        }
+                    }
+                ]
+            });
+
+            $("#kupci").on("click", ".js-delete", function () {
+                var gumb = $(this);
+
+                bootbox.confirm("Jeste li sigurni da želite obrisati ovog kupca?", function (rezultat) {
+                    if (rezultat) {
+                        $.ajax({
+                            url: "/api/kupci/" + gumb.attr("data-kupac-id"),
+                            method: "DELETE",
+                            success: function () {
+                                tablica.row(gumb.parents("tr")).remove().draw();
+                            }
+                        });
+                    }
+                });
+            });
+        });
+    </script>
 }

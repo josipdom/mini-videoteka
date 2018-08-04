@@ -9,20 +9,62 @@
 <p>
         @Html.ActionLink("Novi Film", "Novi", "Filmovi", null, new { @class = "btn btn-primary" })
 </p>
-<table class="table table-bordered table-hover">
+<table id="filmovi" class="table table-bordered table-hover">
     <thead>
         <tr>
             <th>Film</th>
-            <th>Zanr</th>
+            <th>Žanr</th>
+            <th>Obriši</th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var film in Model)
-        {
-            <tr>
-                <td>@Html.ActionLink(film.Naziv, "Uredi", "Filmovi", new { id = film.Id }, null)</td>
-                <td>@film.Zanr.Naziv</td>
-            </tr>
-        }
     </tbody>
 </table>
+
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            var tablica = $("#filmovi").DataTable({
+                ajax: {
+                    url: "/api/filmovi",
+                    dataSrc: ""
+                },
+                columns: [
+                    {
+                        data: "naziv",
+                        render: function(data, type, film) {
+                            return "<a href='/filmovi/edit/" + film.id + "'>" + film.naziv + "</a>";
+                        }
+                    },
+                    {
+                        data: "zanr.naziv"
+                    },
+                    {
+                        data: "id",
+                        render: function(data) {
+                            return "<button class='btn-link js-delete' data-film-id=" + data + ">Obriši</button>";
+                        }
+                    }
+                ]
+            });
+
+
+            $("#filmovi").on("click", ".js-delete", function () {
+                var gumb = $(this);
+
+                bootbox.confirm("Jeste li sigurni da želite obrisati ovaj film?", function (rezultat) {
+                    if (rezultat) {
+                        $.ajax({
+                            url: "/api/filmovi/" + gumb.attr("data-film-id"),
+                            method: "DELETE",
+                            success: function () {
+                                tablica.row(gumb.parents("tr")).remove().draw();
+                            }
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+}
