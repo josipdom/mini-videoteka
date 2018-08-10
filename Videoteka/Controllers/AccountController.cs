@@ -151,7 +151,12 @@ namespace Videoteka.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser {
+                    UserName = model.Email,
+                    Email = model.Email,
+                    ImePrezime = model.ImePrezime,
+                    Grad = model.Grad,
+                    Adresa = model.Adresa};
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {

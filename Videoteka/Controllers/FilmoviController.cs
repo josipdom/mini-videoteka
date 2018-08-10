@@ -26,9 +26,13 @@ namespace Videoteka.Controllers
         }
         public ViewResult Index()
         {
-            return View();    
+            if (User.IsInRole(NazivRole.UpravljanjeFilmovima))
+                return View("Index");
+
+            return View("ReadOnlyList");
         }
 
+        [Authorize(Roles = NazivRole.UpravljanjeFilmovima)]
         public ViewResult Novi()
         {
             var zanrovi = _context.Zanrovi.ToList();

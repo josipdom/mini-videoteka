@@ -1,0 +1,40 @@
+﻿@model IEnumerable<Videoteka.Models.Film>
+
+@{
+    ViewBag.Title = "Filmovi";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Filmovi</h2>
+<table id="filmovi" class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>Film</th>
+            <th>Žanr</th>
+        </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            var tablica = $("#filmovi").DataTable({
+                ajax: {
+                    url: "/api/filmovi",
+                    dataSrc: ""
+                },
+                columns: [
+                    {
+                        data: "naziv"
+                    },
+                    {
+                        data: "zanr.naziv"
+                    }
+                ]
+            });
+        });
+    </script>
+}
