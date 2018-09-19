@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace Videoteka.Controllers
 {
-    [AllowAnonymous]
+    [Authorize]
     public class HomeController : Controller
     {
         public ActionResult Index()

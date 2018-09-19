@@ -6,14 +6,19 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            @Html.ActionLink("Videoteka", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            @Html.ActionLink("Videoteka", "", "", new { area = "" }, new { @class = "navbar-brand" })
         </div>
-        <div class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
-                <li>@Html.ActionLink("Kupci", "Index", "Kupci")</li>
-                <li>@Html.ActionLink("Filmovi", "Index", "Filmovi")</li>
-            </ul>
-            @Html.Partial("_LoginPartial")
-        </div>
+@if (User.Identity.IsAuthenticated)
+{
+    <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+            <li>@Html.ActionLink("Nova posudba", "Index", "Posudbe")</li>
+            <li>@Html.ActionLink("Kupci", "Index", "Kupci")</li>
+            <li>@Html.ActionLink("Filmovi", "Index", "Filmovi")</li>
+        </ul>
+        @Html.Partial("_LoginPartial")
+    </div>
+}
+        
     </div>
 </div>

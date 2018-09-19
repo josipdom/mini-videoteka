@@ -14,7 +14,6 @@ namespace Videoteka.Models
         [StringLength(255)]
         public string Naziv { get; set; }
 
-        [Required]
         public Zanr Zanr { get; set; }
 
         [Display(Name = "Zanr")]
@@ -32,5 +31,6 @@ namespace Videoteka.Models
         [Display(Name = "Broj Na Skladistu")]
         [Range(1, 20)]
         public byte BrojNaSkladistu { get; set; }
+        public byte BrojDostupnih { get; set; }
     }
 }

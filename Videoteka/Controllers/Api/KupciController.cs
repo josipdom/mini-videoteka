@@ -20,10 +20,15 @@ namespace Videoteka.Controllers.Api
         }
 
         //GET / api/kupci
-        public IHttpActionResult GetKupci()
+        public IHttpActionResult GetKupci(string query = null)
         {
-            var kupacDtos = _context.Kupci
-                .Include(c => c.TipClanstva)
+            var kupciQuery = _context.Kupci
+                .Include(c => c.TipClanstva);
+
+            if (!string.IsNullOrWhiteSpace(query))
+                kupciQuery = kupciQuery.Where(c => c.Naziv.Contains(query));
+
+            var kupacDtos = kupciQuery
                 .ToList()
                 .Select(Mapper.Map<Kupac, KupacDto>);
 

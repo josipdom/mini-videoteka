@@ -20,10 +20,16 @@ namespace Videoteka.Controllers.Api
             _context = new ApplicationDbContext();
         }
 
-        public IEnumerable<FilmDto> GetFilmovi()
+        public IEnumerable<FilmDto> GetFilmovi(string query = null)
         {
-            return _context.Filmovi
+            var filmoviQuery = _context.Filmovi
                .Include(m => m.Zanr)
+               .Where(m => m.BrojDostupnih > 0);
+
+            if (!string.IsNullOrWhiteSpace(query))
+                filmoviQuery = filmoviQuery.Where(m => m.Naziv.Contains(query));
+
+            return filmoviQuery
                .ToList()
                .Select(Mapper.Map<Film, FilmDto>);
         }

@@ -16,7 +16,7 @@ namespace Videoteka
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+                defaults: new { controller = "Posudbe", action = "Index", id = UrlParameter.Optional }
             );
         }
     }

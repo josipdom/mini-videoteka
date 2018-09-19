@@ -14,7 +14,9 @@ namespace Videoteka
                         "~/Scripts/bootbox.js",
                         "~/Scripts/respond.js",
                         "~/scripts/datatables/jquery.datatables.js",
-                        "~/scripts/datatables/datatables.bootstrap.js"));
+                        "~/scripts/datatables/datatables.bootstrap.js",
+                        "~/scripts/typeahead.bundle.js",
+                        "~/scripts/toastr.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
@@ -27,7 +29,10 @@ namespace Videoteka
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap-lumen.css",
+                      "~/Content/bootstrap-theme.css",
                       "~/content/datatables/css/datatables.bootstrap.css",
+                      "~/Content/typeahead.css",
+                      "~/Content/toastr.css",
                       "~/Content/site.css"));
         }
     }

@@ -1,0 +1,121 @@
+﻿@model dynamic
+@{
+    ViewBag.Title = "Nova posudba";
+}
+
+<h2>Nova posudba</h2>
+
+<form id="novaPosudba">
+    <div class="form-group">
+        <label>Kupac</label>
+        <div class="tt-container">
+            <input id="kupac" name="kupac" data-rule-validKupac="true" required type="text" value="" class="form-control" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label>Film</label>
+        <div class="tt-container">
+            <input id="film" name="film" data-rule-baremJedanFilm="true" type="text" value="" class="form-control" />
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4 col-sm-4">
+            <ul id="filmovi" class="list-group"></ul>
+        </div>
+    </div>
+
+    <button class="btn btn-primary">Unesi</button>
+</form>
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        $(document).ready(function () {
+
+            var vm = {
+                filmIds: []
+            };
+
+            var kupci = new Bloodhound({
+                datumTokenizer: Bloodhound.tokenizers.obj.whitespace('naziv'),
+                queryTokenizer: Bloodhound.tokenizers.whitespace,
+                remote: {
+                    url: '/api/kupci?query=%QUERY',
+                    wildcard: '%QUERY'
+                }
+            });
+
+            $('#kupac').typeahead({
+                minLength: 3,
+                highlight: true
+            }, {
+                name: 'kupci',
+                display: 'naziv',
+                source: kupci
+            }).on("typeahead:select", function (e, kupac) {
+                vm.kupacId = kupac.id;
+            });
+
+            var filmovi = new Bloodhound({
+                datumTokenizer: Bloodhound.tokenizers.obj.whitespace('naziv'),
+                queryTokenizer: Bloodhound.tokenizers.whitespace,
+                remote: {
+                    url: '/api/filmovi?query=%QUERY',
+                    wildcard: '%QUERY'
+                }
+            });
+
+            $('#film').typeahead({
+                minLength: 3,
+                highlight: true
+            }, {
+                name: 'filmovi',
+                display: 'naziv',
+                source: filmovi
+            }).on("typeahead:select", function (e, film) {
+                $("#filmovi").append("<li class='list-group-item'>" + film.naziv + "</li>");
+
+                $("#film").typeahead("val", "");
+
+                vm.filmIds.push(film.id);
+            });
+
+            $.validator.addMethod("validKupac", function () {
+                return vm.kupacId && vm.kupacId !== 0;
+            }, "Molim odaberite ispravnog kupca.");
+
+            $.validator.addMethod("baremJedanFilm", function () {
+                return vm.filmIds.length > 0;
+            }, "Molim odaberite barem jedan film.");
+
+            var validator = $("#novaPosudba").validate({
+                submitHandler: function () {
+                    $.ajax({
+                        url: "/api/novaPosudba",
+                        method: "post",
+                        data: vm
+                    })
+                    .done(function () {
+                        toastr.success("Posudbe uspješno snimljene.");
+
+                        $("#kupac").typeahead("val", "");
+                        $("#film").typeahead("val", "");
+                        $("#filmovi").empty();
+
+                        vm = { filmIds: [] };
+
+                        validator.resetForm();
+                    })
+                    .fail(function () {
+                        toastr.error("Greška prilikom snimanja.");
+                    });
+
+                    return false;
+                }
+            });
+        });
+    </script>
+}
