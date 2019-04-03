@@ -10,26 +10,26 @@
 {
     @Html.ValidationSummary(true, "Ispravite sljedeće greške..")
     <div class="form-group">
-        @Html.LabelFor(m => m.Film.Naziv)
-        @Html.TextBoxFor(m => m.Film.Naziv, new { @class = "form-control" })
-        @Html.ValidationMessageFor(m => m.Film.Naziv)
+        @Html.LabelFor(m => m.Naziv)
+        @Html.TextBoxFor(m => m.Naziv, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Naziv)
     </div>
     <div class="form-group">
-        @Html.LabelFor(m => m.Film.DatumIzlaska)
-        @Html.TextBoxFor(m => m.Film.DatumIzlaska, "{0:d MMM yyyy}", new { @class = "form-control" })
-        @Html.ValidationMessageFor(m => m.Film.DatumIzlaska)
+        @Html.LabelFor(m => m.DatumIzlaska)
+        @Html.TextBoxFor(m => m.DatumIzlaska, "{0:dd.MM.yyyy.}", new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.DatumIzlaska)
     </div>
     <div class="form-group">
-        @Html.LabelFor(m => m.Film.ZanrId)
-        @Html.DropDownListFor(m => m.Film.ZanrId, new SelectList(Model.Zanrovi, "Id", "Naziv"), "", new { @class = "form-control" })
-        @Html.ValidationMessageFor(m => m.Film.ZanrId)
+        @Html.LabelFor(m => m.ZanrId)
+        @Html.DropDownListFor(m => m.ZanrId, new SelectList(Model.Zanrovi, "Id", "Naziv"), "", new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.ZanrId)
     </div>
     <div class="form-group">
-        @Html.LabelFor(m => m.Film.BrojNaSkladistu)
-        @Html.TextBoxFor(m => m.Film.BrojNaSkladistu, new { @class = "form-control" })
-        @Html.ValidationMessageFor(m => m.Film.BrojNaSkladistu)
+        @Html.LabelFor(m => m.BrojNaSkladistu)
+        @Html.TextBoxFor(m => m.BrojNaSkladistu, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.BrojNaSkladistu)
     </div>
-    @Html.HiddenFor(m => m.Film.Id)
+    @Html.HiddenFor(m => m.Id)
     @Html.AntiForgeryToken()
     <button type="submit" class="btn btn-primary">Spremi</button>
 }

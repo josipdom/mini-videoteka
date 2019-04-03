@@ -10,7 +10,7 @@ namespace Videoteka.ViewModels
     public class FilmFormaViewModel
     {
         public IEnumerable<Zanr> Zanrovi { get; set; }
-        public Film Film { get; set; }
+
         public int? Id { get; set; }
 
         [Required]

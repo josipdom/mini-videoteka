@@ -25,6 +25,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -227,79 +228,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201804071615503_InitialModel.cs" />
-    <Compile Include="Migrations\201804071615503_InitialModel.Designer.cs">
-      <DependentUpon>201804071615503_InitialModel.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201804071627079_AddPretplacenNaKupca.cs" />
-    <Compile Include="Migrations\201804071627079_AddPretplacenNaKupca.Designer.cs">
-      <DependentUpon>201804071627079_AddPretplacenNaKupca.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201804071632537_AddTipClanstva.cs" />
-    <Compile Include="Migrations\201804071632537_AddTipClanstva.Designer.cs">
-      <DependentUpon>201804071632537_AddTipClanstva.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201804071634318_PopulateClanstvoTip.cs" />
-    <Compile Include="Migrations\201804071634318_PopulateClanstvoTip.Designer.cs">
-      <DependentUpon>201804071634318_PopulateClanstvoTip.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201804071644518_ApplyAnnotationsToKupacNaziv.cs" />
-    <Compile Include="Migrations\201804071644518_ApplyAnnotationsToKupacNaziv.Designer.cs">
-      <DependentUpon>201804071644518_ApplyAnnotationsToKupacNaziv.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201804161118268_AddTipClanstvaNaziv.cs" />
-    <Compile Include="Migrations\201804161118268_AddTipClanstvaNaziv.Designer.cs">
-      <DependentUpon>201804161118268_AddTipClanstvaNaziv.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201804161122414_AddSQLUpdate.cs" />
-    <Compile Include="Migrations\201804161122414_AddSQLUpdate.Designer.cs">
-      <DependentUpon>201804161122414_AddSQLUpdate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201804161142003_AddSQLUpdateNaziv2.cs" />
-    <Compile Include="Migrations\201804161142003_AddSQLUpdateNaziv2.Designer.cs">
-      <DependentUpon>201804161142003_AddSQLUpdateNaziv2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201804161230548_AddDatRod.cs" />
-    <Compile Include="Migrations\201804161230548_AddDatRod.Designer.cs">
-      <DependentUpon>201804161230548_AddDatRod.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201804161550524_AddFilm.cs" />
-    <Compile Include="Migrations\201804161550524_AddFilm.Designer.cs">
-      <DependentUpon>201804161550524_AddFilm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201804161552447_Zanrovi.cs" />
-    <Compile Include="Migrations\201804161552447_Zanrovi.Designer.cs">
-      <DependentUpon>201804161552447_Zanrovi.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201804161901446_AddFilm2.cs" />
-    <Compile Include="Migrations\201804161901446_AddFilm2.Designer.cs">
-      <DependentUpon>201804161901446_AddFilm2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201804171957576_AddZanrovi.cs" />
-    <Compile Include="Migrations\201804171957576_AddZanrovi.Designer.cs">
-      <DependentUpon>201804171957576_AddZanrovi.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201808062159097_SeedUsers.cs" />
-    <Compile Include="Migrations\201808062159097_SeedUsers.Designer.cs">
-      <DependentUpon>201808062159097_SeedUsers.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201808071320503_AddImePrezimeZaKorisnikaAplikacije.cs" />
-    <Compile Include="Migrations\201808071320503_AddImePrezimeZaKorisnikaAplikacije.Designer.cs">
-      <DependentUpon>201808071320503_AddImePrezimeZaKorisnikaAplikacije.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201808081453133_AddGradAdresaRegister.cs" />
-    <Compile Include="Migrations\201808081453133_AddGradAdresaRegister.Designer.cs">
-      <DependentUpon>201808081453133_AddGradAdresaRegister.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201808101604157_AddPosudba.cs" />
-    <Compile Include="Migrations\201808101604157_AddPosudba.Designer.cs">
-      <DependentUpon>201808101604157_AddPosudba.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201808101609583_AddBrojDostupnihFilmova.cs" />
-    <Compile Include="Migrations\201808101609583_AddBrojDostupnihFilmova.Designer.cs">
-      <DependentUpon>201808101609583_AddBrojDostupnihFilmova.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Film.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -579,6 +507,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Migrations\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -587,62 +516,6 @@
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201804071615503_InitialModel.resx">
-      <DependentUpon>201804071615503_InitialModel.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804071627079_AddPretplacenNaKupca.resx">
-      <DependentUpon>201804071627079_AddPretplacenNaKupca.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804071632537_AddTipClanstva.resx">
-      <DependentUpon>201804071632537_AddTipClanstva.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804071634318_PopulateClanstvoTip.resx">
-      <DependentUpon>201804071634318_PopulateClanstvoTip.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804071644518_ApplyAnnotationsToKupacNaziv.resx">
-      <DependentUpon>201804071644518_ApplyAnnotationsToKupacNaziv.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804161118268_AddTipClanstvaNaziv.resx">
-      <DependentUpon>201804161118268_AddTipClanstvaNaziv.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804161122414_AddSQLUpdate.resx">
-      <DependentUpon>201804161122414_AddSQLUpdate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804161142003_AddSQLUpdateNaziv2.resx">
-      <DependentUpon>201804161142003_AddSQLUpdateNaziv2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804161230548_AddDatRod.resx">
-      <DependentUpon>201804161230548_AddDatRod.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804161550524_AddFilm.resx">
-      <DependentUpon>201804161550524_AddFilm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804161552447_Zanrovi.resx">
-      <DependentUpon>201804161552447_Zanrovi.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804161901446_AddFilm2.resx">
-      <DependentUpon>201804161901446_AddFilm2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804171957576_AddZanrovi.resx">
-      <DependentUpon>201804171957576_AddZanrovi.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201808062159097_SeedUsers.resx">
-      <DependentUpon>201808062159097_SeedUsers.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201808071320503_AddImePrezimeZaKorisnikaAplikacije.resx">
-      <DependentUpon>201808071320503_AddImePrezimeZaKorisnikaAplikacije.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201808081453133_AddGradAdresaRegister.resx">
-      <DependentUpon>201808081453133_AddGradAdresaRegister.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201808101604157_AddPosudba.resx">
-      <DependentUpon>201808101604157_AddPosudba.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201808101609583_AddBrojDostupnihFilmova.resx">
-      <DependentUpon>201808101609583_AddBrojDostupnihFilmova.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

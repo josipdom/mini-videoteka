@@ -6,7 +6,7 @@ using System.Web.Mvc;
 using Videoteka.Models;
 using Videoteka.ViewModels;
 using System.Data.Entity;
-using Videoteka.Migrations;
+
 using System.Data.Entity.Validation;
 
 namespace Videoteka.Controllers
@@ -90,6 +90,7 @@ namespace Videoteka.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = NazivRole.UpravljanjeFilmovima)]
         public ActionResult Spremi(Film film)
         {
             if (!ModelState.IsValid)
@@ -105,15 +106,17 @@ namespace Videoteka.Controllers
             if (film.Id == 0)
             {
                 film.DatumDodano = DateTime.Now;
+                film.BrojDostupnih = film.BrojNaSkladistu;
                 _context.Filmovi.Add(film);
             }
             else
             {
-                var movieInDb = _context.Filmovi.Single(m => m.Id == film.Id);
-                movieInDb.Naziv = film.Naziv;
-                movieInDb.ZanrId = film.ZanrId;
-                movieInDb.BrojNaSkladistu = film.BrojNaSkladistu;
-                movieInDb.DatumIzlaska = film.DatumIzlaska;
+                var filmDb = _context.Filmovi.Single(m => m.Id == film.Id);
+                filmDb.Naziv = film.Naziv;
+                filmDb.ZanrId = film.ZanrId;
+                filmDb.BrojNaSkladistu = film.BrojNaSkladistu;
+                filmDb.DatumIzlaska = film.DatumIzlaska;
+                film.BrojDostupnih = film.BrojNaSkladistu;
             }
 
                 _context.SaveChanges();
