@@ -237,6 +237,7 @@
     <Compile Include="Models\NazivRole.cs" />
     <Compile Include="Models\Posudba.cs" />
     <Compile Include="Models\TipClanstva.cs" />
+    <Compile Include="Models\Utilities.cs" />
     <Compile Include="Models\Zanr.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -494,7 +495,6 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Filmovi\Random.cshtml" />
     <Content Include="Views\Shared\_NavBar.cshtml" />
     <Content Include="Views\Kupci\Detalji.cshtml" />
     <Content Include="Views\Kupci\Index.cshtml" />
@@ -535,7 +535,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>16019</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:16019/</IISUrl>
+          <IISUrl>https://localhost:44383/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

@@ -9,6 +9,8 @@ namespace Videoteka
         {
             filters.Add(new HandleErrorAttribute());
             filters.Add(new AuthorizeAttribute());
+            //za https pristup web aplikaciji
+            filters.Add(new RequireHttpsAttribute());
         }
     }
 }

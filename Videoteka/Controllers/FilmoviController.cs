@@ -68,25 +68,7 @@ namespace Videoteka.Controllers
                         return HttpNotFound();
             return View(film);
         }
-        // GET: Filmovi/Random
-        public ActionResult Random()
-        {
-            var film = new Film() { Naziv = "Spiderman" };
-            var kupci = new List<Kupac>
-            {
-                new Kupac { Naziv = "Kupac 1" },
-                new Kupac { Naziv = "Kupac 2" }
-
-            };
-
-            var viewModel = new RandomFilmViewModel
-            {
-                Film = film,
-                Kupci = kupci
-            };
-
-            return View(viewModel);
-        }
+        
 
         [HttpPost]
         [ValidateAntiForgeryToken]
